@@ -4,5 +4,5 @@
 
 def cat_arrays(arr1, arr2):
     """return a new list"""
-    concatenated = arr1 * arr2
-    return concatenated
+    new = arr1 + arr2
+    return new
