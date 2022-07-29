@@ -2,6 +2,10 @@
 """concatenates two arrays"""
 
 
+from numpy import concatenate
+
+
 def cat_arrays(arr1, arr2):
     """return a new list"""
-    return arr1 * arr2
+    concatenated = arr1 * arr2
+    return concatenated
