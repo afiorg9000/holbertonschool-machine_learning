@@ -10,4 +10,4 @@ def mat_mul(mat1, mat2):
     if mat1.shape[1] != mat2.shape[0]:
         return None
     else:
-        return np.matmul(mat1, mat2).tolist()
+        return np.dot(mat1, mat2).tolist()
