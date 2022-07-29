@@ -5,9 +5,8 @@ import numpy as np
 
 def mat_mul(mat1, mat2):
     """performs matrix multiplication"""
-    mat1 = np.array(mat1)
-    mat2 = np.array(mat2)
-    if mat1.shape[1] != mat2.shape[0]:
-        return None
+    if (len(mat1[0]) == len(mat2)):
+        return [[sum(a*b for a, b in zip(r, c))
+                for c in zip(*mat2)] for r in mat1]
     else:
-        return np.dot(mat1, mat2).tolist()
+        return None
