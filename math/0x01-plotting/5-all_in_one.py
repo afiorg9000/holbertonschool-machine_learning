@@ -31,21 +31,13 @@ plot3 = plt.subplot2grid((3, 2), (1, 0))
 plot4 = plt.subplot2grid((3, 2), (1, 1))
 plot5 = plt.subplot2grid((3, 2), (2, 0), colspan=2)
 
-
-
-
 plot1.plot(y0, 'r')
 plot1.set_xlim([0, 10])
-
-
 
 plot2.plot(x1, y1, 'm.')
 plot2.set_xlabel('Height (in)', fontsize='x-small')
 plot2.set_ylabel('Weight (lbs)', fontsize='x-small')
 plot2.set_title('''Men's Height vs Weight''', fontsize='x-small')
-
-
-
 
 plot3.plot(x2, y2)
 plot3.set_xlabel('Time (years)', fontsize='x-small')
@@ -54,22 +46,16 @@ plot3.set_title('Exponential Decay of C-14', fontsize='x-small')
 plot3.set_xlim(0, 28650)
 plot3.set_yscale('log')
 
-
-
-
 plot4.plot(x3, y31, 'r--')
 plot4.plot(x3, y32, 'g-')
 plot4.set_xlabel('Time (years)', fontsize='x-small')
 plot4.set_ylabel('Fraction Remaining', fontsize='x-small')
-plot4.set_title('Exponential Decay of Radioactive Elements', fontsize='x-small')
+plot4.set_title('Exponential Decay of Radioactive Elements',
+                fontsize='x-small')
 plot4.set_xlim(0, 20000)
 plot4.set_ylim(0, 1)
-leg = plot4.legend(['C-14', 'Ra-226'], loc='upper right',fontsize='x-small')
+leg = plot4.legend(['C-14', 'Ra-226'], loc='upper right', fontsize='x-small')
 leg.set_in_layout(False)
-
-
-
-
 
 plot5.hist(student_grades, bins=range(0, 110, 10), edgecolor="black")
 plot5.set_xlabel('Grades', fontsize='x-small')
@@ -77,7 +63,6 @@ plot5.set_ylabel('Number of Students', fontsize='x-small')
 plot5.set_xlim(0, 100)
 plot5.set_ylim(0, 30)
 plot5.set_title('Project A', fontsize='x-small')
-
 
 plt.suptitle('All in One', fontsize='x-small')
 
