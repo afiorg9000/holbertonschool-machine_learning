@@ -5,7 +5,7 @@ from numpy import corrcoef
 
 def poly_integral(poly, C=0):
     """calculates the integral of a polynomial:"""
-    coefficients = []
+    coefficients = [C]
     if (poly == 0):
         return None
 
