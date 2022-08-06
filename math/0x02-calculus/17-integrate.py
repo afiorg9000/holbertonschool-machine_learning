@@ -12,10 +12,11 @@ def poly_integral(poly, C=0):
     if len(poly) == 0:
         return coefficients.append(C)
 
-    for i in range(len(poly)):
-        if i == 0:
-            coefficients.append(C)
-            coefficients.append(poly[i])
+    for i, j in enumerate(poly):
+        result = j / (i + 1)
+        if int(result) == result:
+            result = int(result)
         else:
-            coefficients.append(poly[i] / (i + 1))
+            result
+        coefficients.append(result)
     return coefficients
