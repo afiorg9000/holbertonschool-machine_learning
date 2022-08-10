@@ -2,9 +2,6 @@
 """represents an exponential distribution:"""
 
 
-from tkinter import W
-
-
 class Exponential:
     """Exponential distriution class"""
     def __init__(self, data=None, lambtha=1.):
