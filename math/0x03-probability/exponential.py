@@ -16,7 +16,7 @@ class Exponential:
             if len(data) < 2:
                 raise ValueError('data must contain multiple values')
             else:
-                self.lambtha = float(len(data) / sum(data))
+                self.lambtha = float(len(data) / sum(data)) # Divide the sum by the number of entries.
 
     def pdf(self, x):
         """probability density function"""
