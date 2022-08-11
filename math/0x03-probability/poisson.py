@@ -16,7 +16,7 @@ class Poisson:
             if len(data) < 2:
                 raise ValueError('data must contain multiple values')
             else:
-                self.lambtha = float(sum(data) / len(data)) # Divide the sum by the number of entries.
+                self.lambtha = float(sum(data) / len(data))
 
     def pmf(self, k):
         """probability mass function"""
@@ -36,7 +36,7 @@ class Poisson:
         return factorial
 
     def cdf(self, k):
-        """CDF"""
+        """Cumulative distribution function"""
         e = 2.7182818285
         if type(k) is not int:
             k = int(k)
