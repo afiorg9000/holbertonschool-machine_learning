@@ -16,7 +16,7 @@ class Exponential:
             if len(data) < 2:
                 raise ValueError('data must contain multiple values')
             else:
-                self.lambtha = float(len(data) / sum(data)) # Divide the sum by the number of entries.
+                self.lambtha = float(len(data) / sum(data))
 
     def pdf(self, x):
         """probability density function"""
@@ -26,7 +26,7 @@ class Exponential:
         return (self.lambtha * (e ** (- self.lambtha * x)))
 
     def cdf(self, x):
-        """CDF"""
+        """Cumulative distribution function"""
         e = 2.7182818285
         if x < 0:
             return 0
