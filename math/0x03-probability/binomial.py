@@ -32,7 +32,7 @@ class Binomial:
                 self.p = mean / self.n
 
     def pmf(self, k):
-        """PMF"""
+        """Probability mass function"""
         if type(k) is not int:
             k = int(k)
         if k < 0:
@@ -42,7 +42,7 @@ class Binomial:
         return pms
 
     def cdf(self, k):
-        """CDF"""
+        """Cumulative Distribution Function"""
         if type(k) is not int:
             k = int(k)
         if k < 0:
