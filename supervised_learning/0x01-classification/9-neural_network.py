@@ -17,12 +17,12 @@ class NeuralNetwork:
         if nodes < 1:
             raise ValueError('nodes must be a positive integer')
 
-        self.W1 = np.random.normal(nodes, nx)
-        self.b1 = np.zeros(nodes, 1)
-        self.A1 = 0
-        self.W2 = np.random.normal(1, nodes)
-        self.b2 = 0
-        self.A2 = 0
+        self.__W1 = np.random.normal(size=(nodes, nx))
+        self.__b1 = np.zeros(shape=(nodes, 1))
+        self.__A1 = 0
+        self.__W2 = np.random.normal(size=(1, nodes))
+        self.__b2 = 0
+        self.__A2 = 0
 
     @property
     def W1(self):
@@ -45,7 +45,7 @@ class NeuralNetwork:
         return self.__W2
 
     @property
-    def b1(self):
+    def b2(self):
         """getter for output neuron bias"""
         return self.__b2
 
