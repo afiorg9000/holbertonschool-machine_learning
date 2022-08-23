@@ -13,7 +13,7 @@ class Neuron:
             raise TypeError('nx must be an integer')
         if nx < 1:
             raise ValueError('nx must be positive')
-        self.__W = np.random.normal(0.0, 1 / np.sqrt(nx))
+        self.__W = np.random.randn(1, nx)
         self.__b = 0
         self.__A = 0
 
@@ -34,13 +34,15 @@ class Neuron:
 
     def forward_prop(self, X):
         """Calculates the forward propagation of the neuron"""
-        Z = np.dot(self.__W * X) + self.__b
+        Z = np.dot(self.__W, X) + self.__b
         self.__A = 1 / (1 + np.exp(-Z))
         return self.__A
 
     def cost(self, Y, A):
         """Calculates the cost of the model using logistic regression"""
-        return - (1 / m) * np.sum(Y * np.log(A) + (1 - Y) * (np.log(1.0000001 - A)))
+        m = Y.shape[1]
+        C = -(1 / m)*np.sum(Y * np.log(A) + (1 - Y) * (np.log(1.0000001 - A)))
+        return C
 
     def evaluate(self, X, Y):
         """Evaluates the neuron’s predictions"""
@@ -56,30 +58,39 @@ class Neuron:
         self.__W -= (alpha * ((1 / m) * np.matmul(X, dZ.T))).T
         self.__b -= (alpha * ((1 / m) * np.sum(dZ)))
 
-    def train(self, X, Y, iterations=5000, alpha=0.05, verbose=True, graph=True, step=100):
+    def train(self, X, Y, iterations=5000,
+              alpha=0.05, verbose=True, graph=True, step=100):
         """Trains the neuron"""
         if type(iterations) is not int:
             raise TypeError("iterations must be an integer")
-        if iterations < 1:
+        if iterations < 0:
             raise ValueError("iterations must be a positive integer")
         if type(alpha) is not float:
             raise TypeError("alpha must be a float")
-        if alpha < 1:
+        if alpha < 0:
             raise ValueError("alpha must be positive")
         if verbose is True:
             if type(step) is not int:
                 raise TypeError("step must be an integer")
-            if step < 1 or step > iterations:
+            if step < 0 or step > iterations:
                 raise ValueError("step must be positive and <= iterations")
-        for number in range(0, iterations):
+
+        for i in range(iterations):
+            a, cost = self.evaluate(X, Y)
             self.__A = self.forward_prop(X)
             self.gradient_descent(X, Y, self.__A, alpha)
-            if verbose is True and number % step = 0:
-                print("Cost after {iteration} iterations: {cost}")
+            m = Y.shape[1]
+            Cst = []
+            Iter = []
+            if i % step == 0:
+                Cst.append(cost)
+                Iter.append(i)
+                if verbose is True:
+                    print("Cost after", i, " iterations:", cost)
         if graph is True:
-            plt.plot(np.arange(0, iterations + 1), cost)
-            plt.title("Training cost")
-            plt.xlabel("iteration")
-            plt.ylabel("cost")
+            plt.plot(Iter, Cst, 'b')
+            plt.ylabel('cost')
+            plt.xlabel('iteration')
+            plt.title("Training Cost")
             plt.show()
         return self.evaluate(X, Y)
