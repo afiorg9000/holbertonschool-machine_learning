@@ -26,7 +26,7 @@ class DeepNeuralNetwork:
                                                        nx) * np.sqrt(2 / nx)
                 self.weights[bias] = np.zeros((layers[layer], 1))
             else:
-                self.weights[weight] = np.random.randn(
+                self.weights["W1"] = np.random.randn(
                     layers[layer], layers[layer - 1]) * np.sqrt(
                         2 / layers[layer - 1])
-                self.weights[bias] = np.zeros((layers[layer], 1))
+                self.weights["b1"] = np.zeros((layers[layer], 1))
