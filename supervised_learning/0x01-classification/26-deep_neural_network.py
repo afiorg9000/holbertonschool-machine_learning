@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """deep neural network performing binary classification"""
 import numpy as np
+import pickle
 
 
 class DeepNeuralNetwork:
