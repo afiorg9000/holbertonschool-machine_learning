@@ -34,12 +34,16 @@ def train(X_train, Y_train, X_valid,
 
         for i in range(iterations + 1):
             session.run(train, feed_dict={x: X_train, y: Y_train})
-    
+
             if i in range(iterations + 1):
-                acc_train = session.run(accuracy, feed_dict={x: X_train, y: Y_train})
-                acc_valid = session.run(accuracy, feed_dict={x: X_valid, y: Y_valid})
-                cost_train = session.run(loss, feed_dict={x: X_train, y: Y_train})
-                cost_valid = session.run(loss, feed_dict={x: X_valid, y: Y_valid})
+                acc_train = session.run(accuracy,
+                                        feed_dict={x: X_train, y: Y_train})
+                acc_valid = session.run(accuracy,
+                                        feed_dict={x: X_valid, y: Y_valid})
+                cost_train = session.run(loss,
+                                         feed_dict={x: X_train, y: Y_train})
+                cost_valid = session.run(loss,
+                                         feed_dict={x: X_valid, y: Y_valid})
 
             if i % 100 == 0 or i == iterations:
                 print("After {} iterations:".format(i))
