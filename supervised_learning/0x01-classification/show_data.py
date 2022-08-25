@@ -3,7 +3,7 @@
 import matplotlib.pyplot as plt
 import numpy as np
 
-lib_train = np.load('../data/Binary_Train.npz')
+lib_train = np.load('Binary_Train.npz')
 X_3D, Y = lib_train['X'], lib_train['Y']
 
 fig = plt.figure(figsize=(10, 10))

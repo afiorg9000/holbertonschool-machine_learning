@@ -2,14 +2,16 @@
 
 import numpy as np
 
-NN = __import__('11-neural_network').NeuralNetwork
+Deep = __import__('16-deep_neural_network').DeepNeuralNetwork
 
 lib_train = np.load('Binary_Train.npz')
 X_3D, Y = lib_train['X'], lib_train['Y']
 X = X_3D.reshape((X_3D.shape[0], -1)).T
 
 np.random.seed(0)
-nn = NN(X.shape[0], 3)
-_, A = nn.forward_prop(X)
-cost = nn.cost(Y, A)
-print(cost)
+deep = Deep(X.shape[0], [5, 3, 1])
+print(deep.cache)
+print(deep.weights)
+print(deep.L)
+deep.L = 10
+print(deep.L)

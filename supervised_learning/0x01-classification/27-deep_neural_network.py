@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """deep neural network performing binary classification"""
 import numpy as np
+import pickle
 
 
 class DeepNeuralNetwork:
@@ -87,6 +88,50 @@ class DeepNeuralNetwork:
             self.__weights["b" + str(i)] = self.__weights[
                 "b" + str(i)]-(alpha * db)
 
-    def train(self, X, Y, iterations=5000, alpha=0.05):
+    def train(self, X, Y, iterations=5000, alpha=0.05,
+              verbose=True, graph=True, step=100):
         """Trains the deep neural network"""
-        
+        if type(iterations) is not int:
+            raise TypeError("iterations must be an integer")
+        if iterations < 0:
+            raise ValueError("iterations must be a positive integer")
+        if type(alpha) is not float:
+            raise TypeError("alpha must be a float")
+        if alpha < 0:
+            raise ValueError("alpha must be positive")
+        for i in range(iterations):
+            a, cost = self.evaluate(X, Y)
+            A, self.__cache = self.forward_prop(X)
+            self.gradient_descent(Y, self.__cache, alpha)
+            m = Y.shape[1]
+            Cst = []
+            Iter = []
+            if i % step == 0:
+                Cst.append(cost)
+                Iter.append(i)
+                if verbose is True:
+                    print("Cost after", i, " iterations:", cost)
+        if graph is True:
+            plt.plot(Iter, Cst, 'b')
+            plt.ylabel('cost')
+            plt.xlabel('iteration')
+            plt.title("Training Cost")
+            plt.show()
+        return self.evaluate(X, Y)
+
+    def save(self, filename):
+        """saves the instance object to a file in pickle format"""
+        if not(filename.endswith(".pkl")):
+            filename = filename + ".pkl"
+        with open(filename, "wb") as f:
+            pickle.dump(self, f)
+
+    @staticmethod
+    def load(filename):
+        """Loads a pickled DeepNeuralNetwork object"""
+        try:
+            with open(filename, 'rb') as f:
+                c = pickle.load(f)
+            return c
+        except FileNotFoundError:
+            return None

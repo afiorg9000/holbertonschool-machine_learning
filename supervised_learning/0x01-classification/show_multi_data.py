@@ -3,7 +3,7 @@
 import matplotlib.pyplot as plt
 import numpy as np
 
-lib = np.load('../data/MNIST.npz')
+lib = np.load('MNIST.npz')
 print(lib.files)
 X_train_3D = lib['X_train']
 Y_train = lib['Y_train']
