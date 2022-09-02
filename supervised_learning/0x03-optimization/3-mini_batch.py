@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 """trains a loaded neural network model using mini-batch gradient descent:"""
-import numpy as np
 import tensorflow.compat.v1 as tf
 shuffle_data = __import__('2-shuffle_data').shuffle_data
 
@@ -24,8 +23,6 @@ def train_mini_batch(X_train, Y_train, X_valid, Y_valid,
         # loop over epochs:
         for epoch in range(epochs + 1):
             steps = m // batch_size + 1
-            np.random.permutation(X_train)
-            np.random.permutation(Y_train)
             print("After {} epochs:".format(epoch))
             train_cost = sess.run(loss, feed_dict={x: X_train, y: Y_train})
             print("\tTraining Cost: {}".format(train_cost))
