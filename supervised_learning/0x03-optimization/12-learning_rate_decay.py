@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 """creates a learning rate decay operation"""
-import numpy as np
 import tensorflow.compat.v1 as tf
 
 
