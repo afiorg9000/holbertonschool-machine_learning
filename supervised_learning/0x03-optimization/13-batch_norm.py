@@ -6,7 +6,7 @@ import numpy as np
 def batch_norm(Z, gamma, beta, epsilon):
     """normalizes an unactivated output using batch normalization:"""
     #  Compute the mean of the Zs in the layer
-    mean = np.mean(Z, axis=0)
+    mean = Z.shape[0]
     #  compute the variance of the Zs
     variance = np.mean((Z - mean)**2)
     #  Normalize the Z with mean and standard deviation
