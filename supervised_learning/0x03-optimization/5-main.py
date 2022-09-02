@@ -24,7 +24,7 @@ def calculate_cost(Y, A):
     return cost
 
 if __name__ == '__main__':
-    lib_train = np.load('../data/Binary_Train.npz')
+    lib_train = np.load('Binary_Train.npz')
     X_3D, Y = lib_train['X'], lib_train['Y'].T
     X = X_3D.reshape((X_3D.shape[0], -1))
 
