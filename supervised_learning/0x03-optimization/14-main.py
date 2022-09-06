@@ -6,7 +6,7 @@ tf.disable_eager_execution()
 create_batch_norm_layer = __import__('14-batch_norm').create_batch_norm_layer
 
 if __name__ == '__main__':
-    lib= np.load('../data/MNIST.npz')
+    lib= np.load('MNIST.npz')
     X_3D = lib['X_train']
     X = X_3D.reshape((X_3D.shape[0], -1))
 
