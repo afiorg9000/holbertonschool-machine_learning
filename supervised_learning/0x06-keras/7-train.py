@@ -10,12 +10,11 @@ def train_model(network, data, labels, batch_size, epochs,
                 shuffle=False):
     """model using mini-batch gradient descent:"""
     stopping = []
-    if validation_data:
-        if early_stopping:
+    if validation_data is not None:
+        if early_stopping is True:
             stopping.append(K.callbacks.EarlyStopping(patience=patience))
-        if learning_rate_decay:
-            lr = 0
-            lr.append(K.callbacks.LearningRateScheduler(
+        if learning_rate_decay is not None:
+            stopping.append(K.callbacks.LearningRateScheduler(
                           schedule=lambda epoch:
                           alpha / (1 + decay_rate * epoch),
                           verbose=1))
