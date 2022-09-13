@@ -23,7 +23,7 @@ one_hot = __import__('3-one_hot').one_hot
 train_model = __import__('5-train').train_model
 
 if __name__ == '__main__':
-    datasets = np.load('../data/MNIST.npz')
+    datasets = np.load('MNIST.npz')
     X_train = datasets['X_train']
     X_train = X_train.reshape(X_train.shape[0], -1)
     Y_train = datasets['Y_train']
