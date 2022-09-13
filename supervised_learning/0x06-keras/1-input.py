@@ -5,7 +5,6 @@ import tensorflow.keras as K
 
 def build_model(nx, layers, activations, lambtha, keep_prob):
     """neural network with keras"""
-    K.Model()
     inputs = K.Input(shape=nx,)
     x = K.layers.Dense(layers[0],
                        activation=activations[0],
