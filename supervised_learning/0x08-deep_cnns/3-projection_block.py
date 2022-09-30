@@ -4,7 +4,7 @@ import tensorflow.keras as K
 
 
 def projection_block(A_prev, filters, s=2):
-"""3. Projection Block"""
+    """3. Projection Block"""
     F11, F3, F12 = filters
     initializer = K.initializers.HeNormal()
     conv1 = K.layers.Conv2D(filters=F11, kernel_size=(1, 1), strides=s,
