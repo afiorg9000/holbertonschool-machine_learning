@@ -13,7 +13,7 @@ def identity_block(A_prev, filters):
     act1 = K.layers.Activation('relu')(batch1)
     conv2 = K.layers.Conv2D(filters=F3, kernel_size=(3, 3), padding='same',
                             kernel_initializer=initializer)(act1)
-    batch2 = K.layers.BatchNormalization()(conv1)
+    batch2 = K.layers.BatchNormalization()(conv2)
     act2 = K.layers.Activation('relu')(batch2)
     conv3 = K.layers.Conv2D(filters=F12, kernel_size=(1, 1), padding='same',
                             kernel_initializer=initializer)(act2)
