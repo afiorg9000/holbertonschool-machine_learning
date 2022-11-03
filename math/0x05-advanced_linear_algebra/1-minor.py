@@ -33,3 +33,30 @@ def determinant(matrix):
             (-1) ** c) * matrix[0][c] * determinant(
                 squared_minor(matrix, 0, c))
     return deter
+
+
+def minor(matrix):
+    """calculates the minor matrix of a matrix:"""
+
+    if not isinstance(matrix, list) or len(matrix) == 0:
+        raise TypeError("matrix must be a list of lists")
+
+    if not all([isinstance(row, list) for row in matrix]):
+        raise TypeError("matrix must be a list of lists")
+
+    if not all([len(row) == len(matrix) for row in matrix]):
+        raise ValueError("matrix must be a non-empty square matrix")
+
+    if len(matrix) == 1:
+        return [[1]]
+
+    if len(matrix) == 2:
+        return [[matrix[1][1], matrix[1][0]], [matrix[0][1], matrix[0][0]]]
+
+    result = []
+    for i in range(len(matrix)):
+        minor_row = []
+        for j in range(len(matrix[i])):
+            minor_row.append(determinant(squared_minor(matrix, i, j)))
+        result.append(minor_row)
+    return result
