@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+"""calculates the minor matrix of a matrix:"""
+
 
 def squared_minor(m, i, j):
     """calculates the minor of a squared matrix"""
