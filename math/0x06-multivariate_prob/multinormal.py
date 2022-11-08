@@ -5,13 +5,11 @@ import numpy as np
 
 class MultiNormal:
     def __init__(self, data):
-        if type(data) != np.ndarray or len(data.shape) != 2:
+        """Constructor Class"""
+        if type(data) is not np.ndarray or len(data.shape) != 2:
             raise TypeError("data must be a 2D numpy.ndarray")
-        elif data.shape[1] < 2:
-            raise ValueError('data must contain multiple data points')
-
-        sample_count = data.shape[1]
-        self.mean = np.mean(data, axis=1, keepdims=True)
-        mu = self.mean
-        self.cov = np.matmul(data - mu, data.T - mu.T) / (sample_count - 1)
-
+        if data.shape[1] < 2:
+            raise ValueError("data must contain multiple data points")
+        self.mean = np.mean(data, axis=1).reshape(data.shape[0], 1)
+        X_mean = data - self.mean
+        self.cov = np.matmul(X_mean, X_mean.T) / (data.shape[1] - 1)
