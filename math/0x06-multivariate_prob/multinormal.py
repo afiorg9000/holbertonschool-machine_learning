@@ -4,6 +4,7 @@ import numpy as np
 
 
 class MultiNormal:
+    """represents a Multivariate Normal distribution:"""
     def __init__(self, data):
         """Constructor Class"""
         if type(data) is not np.ndarray or len(data.shape) != 2:
