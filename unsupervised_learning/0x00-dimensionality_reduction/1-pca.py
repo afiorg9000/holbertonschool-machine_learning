@@ -5,15 +5,8 @@ import numpy as np
 
 def pca(X, ndim):
     """performs PCA on a dataset:"""
-    X_mean = np.mean(X, axis=0)
-    X_centered = X - X_mean
-
-    covar = np.dot(X_centered.T, X_centered) / len(X)
-
-    eigvals, eigvecs = np.linalg.eigh(covar)
-
-    idx = eigvals.argsort()[::-1]
-
-    T = eigvecs[:, idx][:, :ndim]
-
+    X_mean = X - np.mean(X, axis=0)
+    u, s, vr = np.linalg.svd(X_mean)
+    W = vr[:ndim].T
+    T = np.matmul(X_mean, W)
     return T
