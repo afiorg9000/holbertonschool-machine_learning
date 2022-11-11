@@ -5,8 +5,7 @@ import numpy as np
 
 def pca(X, var=0.95):
     """performs PCA on a dataset:"""
-    cov_matrix = np.cov(X, rowvar=False)
-    eigvals, eigvecs = np.linalg.eigh(cov_matrix)
-    idx = np.argsort(-eigvals)
-    W = eigvecs[:, idx]
+    u, s, vr = np.linalg.svd(X)
+    k = np.sum(np.cumsum(s) / np.sum(s) < var)
+    W = vr.T[:, :k + 1]
     return W
