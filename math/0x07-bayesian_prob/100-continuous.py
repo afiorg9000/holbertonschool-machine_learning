@@ -1,7 +1,5 @@
 #!/usr/bin/env python3
-"""
-Calculates the posterior for bayes
-"""
+"""calculates posterior probability"""
 from scipy import special
 
 
