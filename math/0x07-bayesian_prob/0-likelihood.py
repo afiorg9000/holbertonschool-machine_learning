@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
-import numpy as np
 """Calculates probable side affects"""
+import numpy as np
 
 
 def likelihood(x, n, P):
