@@ -9,8 +9,8 @@ def likelihood(x, n, P):
         raise ValueError("n must be a positive integer")
 
     if type(x) is not int or x < 0:
-        raise ValueError("x must be an integer that is \
-            greater than or equal to 0")
+        VE = "x must be an integer that is greater than or equal to 0"
+        raise ValueError(VE)
 
     if x > n:
         raise ValueError("x cannot be greater than n")
@@ -22,7 +22,10 @@ def likelihood(x, n, P):
         if i < 0 or i > 1:
             raise ValueError("All values in P must be in the range [0, 1]")
 
-    prob = (np.math.factorial(n) / np.math.factorial(
-        (n-x))) * np.power((1-P),
-                           (n-x)) * np.power(P, x)
-    return prob
+    P_p = np.zeros(P.shape)
+    n_f = np.math.factorial(n)
+    x_f = np.math.factorial(x)
+    p_f = np.math.factorial(n - x)
+    for i in range(len(P)):
+        P_p[i] = (n_f / (p_f * x_f)) * (P[i] ** x) * ((1 - P[i]) ** (n - x))
+    return P_p
