@@ -14,6 +14,10 @@ def classes(X, C):
 
 def kmeans(X, k, iterations=1000):
     """performs K-means on a dataset:"""
+    if not isinstance(k, int) or k <= 0:
+        return None
+    if not isinstance(X, np.ndarray) or len(X.shape) != 2:
+        return None
     d = X.shape[1]
     min = np.amin(X, axis=0)
     max = np.amax(X, axis=0)
