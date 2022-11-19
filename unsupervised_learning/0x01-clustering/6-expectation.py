@@ -15,6 +15,7 @@ def expectation(X, pi, m, S):
         return None, None
     if type(S) is not np.ndarray or S.ndim != 3 or S.shape != (k, d, d):
         return None, None
+
     n, d = X.shape
     k = pi.shape[0]
     if m.shape[0] != k or m.shape[1] != d:
