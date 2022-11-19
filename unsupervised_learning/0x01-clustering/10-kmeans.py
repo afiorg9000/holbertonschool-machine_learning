@@ -9,4 +9,4 @@ def kmeans(X, k):
     kmeans.fit(X)
     C = kmeans.cluster_centers_
     clss = kmeans.labels_
-    return C, 
+    return C,
