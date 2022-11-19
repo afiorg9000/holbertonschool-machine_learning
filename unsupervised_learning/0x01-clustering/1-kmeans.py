@@ -20,12 +20,12 @@ def kmeans(X, k, iterations=1000):
         return None
     if type(iterations) is not int or int(iterations) != iterations or iterations < 1:
         return None, None
-    d = X.shape
+    _, d = X.shape
     min = np.amin(X, axis=0)
     max = np.amax(X, axis=0)
     C = np.random.uniform(min, max, size=(k, d))
     nC = C.copy()
-    for d in range(iterations):
+    for _ in range(iterations):
         clss = classes(X, C)
         for i in range(k):
             indices = np.argwhere(clss == i).reshape(-1)
