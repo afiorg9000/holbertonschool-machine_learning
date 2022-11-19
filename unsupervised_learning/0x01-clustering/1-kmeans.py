@@ -18,6 +18,8 @@ def kmeans(X, k, iterations=1000):
         return None
     if not isinstance(X, np.ndarray) or len(X.shape) != 2:
         return None
+    if type(iterations) is not int or int(iterations) != iterations or iterations < 1:
+        return None, None
     d = X.shape[1]
     min = np.amin(X, axis=0)
     max = np.amax(X, axis=0)
