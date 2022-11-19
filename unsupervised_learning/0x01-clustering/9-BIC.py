@@ -8,6 +8,7 @@ def BIC(X, kmin=1, kmax=None, iterations=1000, tol=1e-5, verbose=False):
     """clusters for a GMM using the Bayesian Information Criterion:"""
     if type(X) is not np.ndarray or X.ndim != 2:
         return None, None, None, None
+    n, d = X.shape
     if type(kmin) is not int or kmin != int(kmin) or kmin < 1:
         return None, None, None, None
     if kmax is None:
@@ -22,7 +23,7 @@ def BIC(X, kmin=1, kmax=None, iterations=1000, tol=1e-5, verbose=False):
         return None, None, None, None
     if type(verbose) is not bool:
         return None, None, None, None
-    n, d = X.shape
+
     b = np.zeros(kmax + 1 - kmin)
     lL = np.zeros(kmax + 1 - kmin)
     results = []
