@@ -20,7 +20,7 @@ def kmeans(X, k, iterations=1000):
         return None
     if type(iterations) is not int or int(iterations) != iterations or iterations < 1:
         return None, None
-    d = X.shape[1]
+    d = X.shape
     min = np.amin(X, axis=0)
     max = np.amax(X, axis=0)
     C = np.random.uniform(min, max, size=(k, d))
