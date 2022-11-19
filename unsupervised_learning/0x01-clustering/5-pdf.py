@@ -5,6 +5,14 @@ import numpy as np
 
 def pdf(X, m, S):
     """calculates the probability density function:"""
+    if type(X) is not np.ndarray or len(X.shape) != 2:
+        return None
+    if type(m) is not np.ndarray or len(m.shape) != 1:
+        return None
+    if type(S) is not np.ndarray or S.ndim != 2 or S.shape[0] != S.shape[1]:
+        return None
+    if S.shape[0] != m.shape[0]:
+        return None
     _, d = X.shape
 
     X_mean = X - m
