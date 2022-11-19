@@ -6,9 +6,8 @@ pdf = __import__('5-pdf').pdf
 
 def expectation(X, pi, m, S):
     """calculates the expectation step in the EM algorithm for a GMM:"""
-        if type(X) is not np.ndarray or X.ndim != 2:
+    if type(X) is not np.ndarray or X.ndim != 2:
         return None, None
-    d = X.shape[1]
     if type(pi) is not np.ndarray or pi.ndim != 1 or not np.isclose(np.sum(pi), 1):
         return None, None
     k = pi.shape[0]
@@ -26,5 +25,5 @@ def expectation(X, pi, m, S):
     for i in range(k):
         gG[i] = pi[i] * pdf(X, m[i], S[i])
     marginal = np.sum(gG, axis=0)
-    l = np.sum(np.log(marginal))
+    lL = np.sum(np.log(marginal))
     return gG / marginal, lL
