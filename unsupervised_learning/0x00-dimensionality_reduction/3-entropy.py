@@ -5,12 +5,7 @@ import numpy as np
 
 def HP(Di, beta):
     """calculate HI"""
-    Hi = 0
-    for i in range(Di.shape[0]):
-        Hi += np.exp(-beta * Di[i])
-    Hi = - beta * Hi
-    """calculate PI"""
-    Pi = np.zeros(Di.shape[0])
-    for i in range(Di.shape[0]):
-        Pi[i] = np.exp(-beta * Di[i]) / Hi
-    return (Hi, Pi)
+    Pi = np.exp(- Di * beta)
+    Pi = Pi / np.sum(Pi)
+    Hi = np.sum(-Pi * np.log2(Pi))
+    return Hi, Pi
