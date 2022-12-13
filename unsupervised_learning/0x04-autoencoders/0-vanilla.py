@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
+"""creates an autoencoder:"""
 import tensorflow.keras as keras
 
 
 def autoencoder(input_dims, hidden_layers, latent_dims):
-    # encoder
+    """creates an autoencoder:"""
     encoder_inputs = keras.Input(shape=(input_dims,))
     x = keras.layers.Dense(hidden_layers[0], activation='relu')(encoder_inputs)
 
