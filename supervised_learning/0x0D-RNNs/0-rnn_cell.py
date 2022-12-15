@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+"""represents a gated recurrent unit:"""
 import numpy as np
 
 
