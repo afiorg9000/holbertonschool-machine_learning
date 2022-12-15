@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import numpy as np
 
 
@@ -12,7 +13,8 @@ class RNNCell:
 
     def forward(self, h_prev, x_t):
         """represents a cell of a simple RNN:"""
-        h_next = np.tanh(np.matmul(np.hstack((h_prev, x_t)), self.Wh) + self.bh)
+        h_next = np.tanh(np.matmul(np.hstack((h_prev, x_t)),
+                                   self.Wh) + self.bh)
         y = np.matmul(h_next, self.Wy) + self.by
         y = np.exp(y) / np.sum(np.exp(y), axis=1, keepdims=True)
         return h_next, y
