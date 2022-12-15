@@ -16,5 +16,6 @@ class BidirectionalCell:
 
     def forward(self, h_prev, x_t):
         """represents a bidirectional cell of an RNN:"""
-        h_next = np.tanh(np.matmul(np.hstack((h_prev, x_t)), self.Whf) + self.bhf)
+        h_next = np.tanh(np.matmul(np.hstack((h_prev, x_t)),
+                                   self.Whf) + self.bhf)
         return h_next
