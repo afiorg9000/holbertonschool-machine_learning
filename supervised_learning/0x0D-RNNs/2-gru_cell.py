@@ -16,13 +16,17 @@ class GRUCell:
         self.bh = np.zeros((1, h))
         self.by = np.zeros((1, o))
 
+    def sigmoid(self, z):
+        """Calculates the sigmoid activation of z"""
+        return 1 / (1 + np.exp(-z))
+
     def forward(self, h_prev, x_t):
         """represents a gated recurrent unit:"""
-        xh = np.concatenate((h_prev, x_t), axis=1)
-        z = np.matmul(xh, self.Wz) + self.bz
-        r = np.matmul(xh, self.Wr) + self.br
-        h_hat = np.matmul(xh, self.Wh) + self.bh
-        h_hat = np.tanh(h_hat)
+        x = np.concatenate((h_prev, x_t), axis=1)
+        z = self.sigmoid(np.matmul(x, self.Wz) + self.bz)
+        r = self.sigmoid(np.matmul(x, self.Wr) + self.br)
+        x = np.concatenate((r * h_prev, x_t), axis=1)
+        h_hat = np.tanh(np.matmul(x, self.Wh) + self.bh)
         h_next = (1 - z) * h_prev + z * h_hat
         y = np.matmul(h_next, self.Wy) + self.by
         y = np.exp(y) / np.sum(np.exp(y), axis=1, keepdims=True)
