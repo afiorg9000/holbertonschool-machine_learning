@@ -14,15 +14,15 @@ def classes(X, C):
 
 def kmeans(X, k, iterations=1000):
     """performs K-means on a dataset:"""
-    if not isinstance(k, int) or k <= 0:
-        return None
-    if not isinstance(X, np.ndarray) or len(X.shape) != 2:
-        return None
+    if type(X) is not np.ndarray or X.ndim != 2:
+        return None, None
+    if type(k) is not int or int(k) != k or k < 1:
+        return None, None
     if type(iterations) is not int or int(iterations) != iterations or iterations < 1:
         return None, None
     _, d = X.shape
-    min = np.amin(X, axis=0)
-    max = np.amax(X, axis=0)
+    min = np.min(X, axis=0)
+    max = np.max(X, axis=0)
     C = np.random.uniform(min, max, size=(k, d))
     nC = C.copy()
     for _ in range(iterations):
