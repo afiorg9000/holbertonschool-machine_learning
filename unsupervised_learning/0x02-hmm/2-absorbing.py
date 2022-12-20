@@ -5,28 +5,32 @@ import numpy as np
 
 def absorbing(P):
     """determines if a markov chain is absorbing:"""
-    if not isinstance(P, np.ndarray) or len(P.shape) != 2:
+    if type(P) is not np.ndarray:
         return False
-    if P.shape[0] != P.shape[1]:
+    if P.ndim != 2 or P.shape[0] != P.shape[1]:
         return False
-    if np.sum(P, axis=1).all() != 1:
+    if not np.allclose(np.sum(P, axis=1), 1):
         return False
-    if np.diag(P).all() == 1:
+
+    n = P.shape[0]
+    i = 0
+    while P[i][i] == 1:
+        i += 1
+        if i == len(P):
+            return True
+    if i == 0:
+        return False
+    if (1 in np.max(P[i:, :], axis=0)) or (np.sum(P[:i, i:]) != 0):
+        return False
+    Q = P[i:, i:]
+    R = P[i:, :i]
+    t = Q.shape[0]
+    IQ = np.eye(t) - Q
+    if np.linalg.det(IQ) == 0:
+        return False
+    N = np.linalg.inv(IQ)
+    B = np.matmul(N, R)
+    if np.any(N * R == 0):
         return True
-    for i in range(P.shape[0]):
-        if np.diag(P)[i] == 1:
-            for j in range(P.shape[0]):
-                if P[i][j] != 0 and i != j:
-                    return False
-    diag = np.diag(P)
-    ab = (diag == 1)
-    if ab.all():
-        return True
-    for i in range(len(diag)):
-        for j in range(len(diag)):
-            if P[i, j] > 0 and ab[j]:
-                ab[i] = 1
-    ab2 = (ab == 1)
-    if ab2.all():
-        return True
+
     return False
