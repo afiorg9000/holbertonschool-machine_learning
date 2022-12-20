@@ -11,5 +11,13 @@ def regular(P):
         return None
     if np.all(P * P) == 0:
         return None
-    A = np.linalg.matrix_power(P, 100)
-    return A[:, -1]
+    if P.shape[0] != P.shape[1]:
+        return None
+
+    n, _ = P.shape
+
+    eigen_val, eigen_vec = np.linalg.eig(P.T)
+    close_1 = np.isclose(eigen_val, 1)
+    target_v = eigen_vec[:, close_1]
+    target_v = target_v[:, 0]
+    return (target_v / np.sum(target_v)).reshape(1, n)
