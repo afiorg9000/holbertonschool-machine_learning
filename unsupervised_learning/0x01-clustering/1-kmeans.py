@@ -18,7 +18,9 @@ def kmeans(X, k, iterations=1000):
         return None, None
     if type(k) is not int or int(k) != k or k < 1:
         return None, None
-    if type(iterations) is not int or int(iterations) != iterations or iterations < 1:
+    if type(
+        iterations) is not int or int(
+            iterations) != iterations or iterations < 1:
         return None, None
     _, d = X.shape
     min = np.min(X, axis=0)
