@@ -5,8 +5,7 @@ import sklearn.cluster
 
 def kmeans(X, k):
     """K-means algorithm"""
-    kmeans = sklearn.cluster.KMeans(n_clusters=k)
-    kmeans.fit(X)
-    C = kmeans.cluster_centers_
-    clss = kmeans.labels_
-    return C, clss
+    km = sklearn.cluster.KMeans(n_clusters=k)
+    km.fit(X)
+
+    return km.cluster_centers_, km.labels_
