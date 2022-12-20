@@ -4,7 +4,6 @@ import numpy as np
 GP = __import__('2-gp').GaussianProcess
 
 
-
 class BayesianOptimization:
     """Bayesian optimization on a noiseless 1D Gaussian process:"""
     def __init__(self, f, X_init, Y_init, bounds, ac_samples, l=1,
