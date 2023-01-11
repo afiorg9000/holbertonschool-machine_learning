@@ -2,6 +2,7 @@
 """creates a TF-IDF embedding:"""
 from sklearn.feature_extraction.text import TfidfVectorizer
 
+
 def tf_idf(sentences, vocab=None):
     """creates a TF-IDF embedding:"""
     if vocab is None:
