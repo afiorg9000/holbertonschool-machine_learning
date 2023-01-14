@@ -6,32 +6,29 @@ import tensorflow.keras as keras
 def autoencoder(input_dims, hidden_layers, latent_dims):
     """creates an autoencoder:"""
     input_encoder = keras.Input(shape=(input_dims,))
-
-    # Encoder
-    encoder_layer = input_encoder
-    for i in range(len(hidden_layers)):
-        encoder_layer = keras.layers.Dense(hidden_layers[i],
-                                           activation='relu')(encoder_layer)
-
-    latent = keras.layers.Dense(latent_dims,
-                                activation='relu')(encoder_layer)
-    encoder = keras.Model(inputs=input_encoder, outputs=latent)
-
-    # Decoder
-
+    hidden_ly = keras.layers.Dense(units=hidden_layers[0], activation='relu')
+    Y_prev = hidden_ly(X_input_encoded)
+    for i in range(1, len(hidden_layers)):
+        hidden_ly = keras.layers.Dense(units=hidden_layers[i],
+                                       activation='relu')
+        Y_prev = hidden_ly(Y_prev)
+    latent = keras.layers.Dense(units=latent_dims, activation='relu')
+    bottleneck = latent_ly(Y_prev)
+    encoder = keras.Model(X_input_encoded, bottleneck)
     input_decoder = keras.Input(shape=(latent_dims,))
-    decoder_layer = input_decoder
-    for i in range(len(hidden_layers) - 1, -1, -1):
-        decoder_layer = keras.layers.Dense(hidden_layers[i],
-                                           activation='relu')(decoder_layer)
-
-    output_decoder = keras.layers.Dense(input_dims,
-                                        activation='sigmoid')(decoder_layer)
-
-    decoder = keras.Model(inputs=input_decoder, outputs=output_decoder)
-
-    # Autoencoder
-    auto = keras.Model(inputs=input_encoder,
-                       outputs=decoder(encoder(input_encoder)))
-    auto.compile(optimizer='adam', loss='binary_crossentropy')
+    hidden_ly_decoded = keras.layers.Dense(units=hidden_layers[-1],
+                                           activation='relu')
+    Y_prev = hidden_ly_decoded(X_input_decoded)
+    for j in range(len(hidden_layers) - 2, -1, -1):
+        hidden_ly_decoded = keras.layers.Dense(units=hidden_layers[j],
+                                               activation='relu')
+        Y_prev = hidden_ly_decoded(Y_prev)
+    last_layer = keras.layers.Dense(units=input_dims, activation='sigmoid')
+    output = last_layer(Y_prev)
+    decoder = keras.Model(input_decoder, output)
+    X_input = keras.Input(shape=(input_dims,))
+    encoder = encoder(X_input)
+    decoder = decoder(encoder_o)
+    auto = keras.Model(X_input, decoder_o)
+    auto.compile(loss='binary_crossentropy', optimizer='adam')
     return encoder, decoder, auto
