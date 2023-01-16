@@ -2,6 +2,7 @@
 """calculates the n-gram BLEU score for a sentence:"""
 import numpy as np
 
+
 def ngram_bleu(references, sentence, n):
     """calculates the n-gram BLEU score for a sentence:"""
     count = {}
