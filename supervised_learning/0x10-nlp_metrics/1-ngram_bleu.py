@@ -1,7 +1,5 @@
 #!/usr/bin/env python3
 """calculates the n-gram BLEU score for a sentence:"""
-
-
 import numpy as np
 
 def ngram_bleu(references, sentence, n):
