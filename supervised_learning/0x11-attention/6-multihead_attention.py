@@ -6,6 +6,7 @@ sdp_attention = __import__('5-sdp_attention').sdp_attention
 
 class MultiHeadAttention(tf.keras.layers.Layer):
     """perform multi head attention:"""
+
     def __init__(self, dm, h):
         """perform multi head attention:"""
         self.h = h
@@ -23,6 +24,7 @@ class MultiHeadAttention(tf.keras.layers.Layer):
         Q = self.Wq(Q)
         K = self.Wk(K)
         V = self.Wv(V)
+
         Q = tf.concat(tf.split(Q, self.h, axis=-1), axis=0)
         K = tf.concat(tf.split(K, self.h, axis=-1), axis=0)
         V = tf.concat(tf.split(V, self.h, axis=-1), axis=0)
