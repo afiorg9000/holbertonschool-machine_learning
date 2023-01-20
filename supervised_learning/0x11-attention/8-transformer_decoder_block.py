@@ -22,13 +22,15 @@ class DecoderBlock(tf.keras.layers.Layer):
 
     def call(self, x, enc_output, training, look_ahead_mask, padding_mask):
         """create an encoder block for a transformer:"""
-        attn1, attn_weights_block1 = self.mha1(x, x, x, look_ahead_mask)
-        attn1 = self.dropout1(attn1, training=training)
-        out1 = self.layernorm1(attn1 + x)
-        attn2, attn_weights_block2 = self.mha2(
-            enc_output, enc_output, out1, padding_mask)
-        attn2 = self.dropout2(attn2, training=training)
-        out2 = self.layernorm2(attn2 + out1)
-        ffn_output = self.dense_hidden(out2)
-        ffn_output = self.dropout3(ffn_output, training=training)
-        return self.dense_output(ffn_output + out2)
+        start, weights1 = self.mha1(x, x, x, look_ahead_mask)
+        start = self.dropout1(start, training=training)
+        start = self.layernorm1(x + start)
+        mid, weights2 = self.mha2(start, encoder_output, encoder_output,
+                                  padding_mask)
+        mid = self.dropout2(mid, training=training)
+        mid = self.layernorm2(start + mid)
+        out = self.dense_hidden(mid)
+        out = self.dense_output(out)
+        out = self.dropout3(out, training=training)
+        out = self.layernorm3(mid + out)
+        return out
