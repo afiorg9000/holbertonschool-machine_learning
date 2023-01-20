@@ -21,17 +21,18 @@ class MultiHeadAttention(tf.keras.layers.Layer):
 
     def call(self, Q, K, V, mask):
         """perform multi head attention:"""
+        batches = tf.shape(Q)[0]
         Q = self.Wq(Q)
         K = self.Wk(K)
         V = self.Wv(V)
 
-        Q = tf.concat(tf.split(Q, self.h, axis=-1), axis=0)
-        K = tf.concat(tf.split(K, self.h, axis=-1), axis=0)
-        V = tf.concat(tf.split(V, self.h, axis=-1), axis=0)
-
-        output, weights = sdp_attention(Q, K, V, mask)
-
-        output = tf.concat(tf.split(output, self.h, axis=0), axis=-1)
-        output = self.linear(output)
-
-        return output, weights
+        def split_heads(x, batch_size):
+            x = tf.reshape(x, (batch_size, -1, self.h, self.depth))
+            return tf.transpose(x, perm=[0, 2, 1, 3])
+        Q = split_heads(Q, batches)
+        K = split_heads(K, batches)
+        V = split_heads(V, batches)
+        outs, weights = sdp_attention(Q, K, V, mask)
+        outs = tf.transpose(outs, perm=[0, 2, 1, 3])
+        outs = tf.reshape(outs, [batches, -1, self.dm])
+        return self.linear(outs), weights
