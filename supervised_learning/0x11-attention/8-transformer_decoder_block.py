@@ -6,7 +6,6 @@ MultiHeadAttention = __import__('6-multihead_attention').MultiHeadAttention
 
 class DecoderBlock(tf.keras.layers.Layer):
     """create an encoder block for a transformer:"""
-
     def __init__(self, dm, h, hidden, drop_rate=0.1):
         """create an encoder block for a transformer:"""
         self.mha1 = MultiHeadAttention(dm, h)
