@@ -10,7 +10,7 @@ class Encoder(tf.keras.layers.Layer):
 
     def __init__(self, N, dm, h, hidden, input_vocab, max_seq_len,
                  drop_rate=0.1):
-    """create the encoder for a transformer:"""
+        """create the encoder for a transformer:"""
         super().__init__()
         self.N = N
         self.dm = dm
