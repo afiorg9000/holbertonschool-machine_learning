@@ -20,18 +20,21 @@ class MultiHeadAttention(tf.keras.layers.Layer):
  
     def call(self, Q, K, V, mask):
         """perform multi head attention:"""
-        batches = tf.shape(Q)[0]
-        Q = self.Wq(Q)
-        K = self.Wk(K)
-        V = self.Wv(V)
+        batch_size = tf.shape(Q)[0]
+        q = self.Wq(Q)
+        k = self.Wk(K)
+        v = self.Wv(V)
+        q = self.split_heads(q, batch_size)
+        k = self.split_heads(k, batch_size)
+        v = self.split_heads(v, batch_size)
+        scaled_attention, attention_weights = sdp_attention(q, k, v, mask)
+        scaled_attention = tf.transpose(scaled_attention, perm=[0, 2, 1, 3])
+        concat_attention = tf.reshape(scaled_attention, (batch_size, -1,
+                                                         self.dm))
+        output = self.linear(concat_attention)
+        return output, attention_weights
 
-        def split_heads(x, batch_size):
-            x = tf.reshape(x, (batch_size, -1, self.h, self.depth))
-            return tf.transpose(x, perm=[0, 2, 1, 3])
-        Q = split_heads(Q, batches)
-        K = split_heads(K, batches)
-        V = split_heads(V, batches)
-        outs, weights = sdp_attention(Q, K, V, mask)
-        outs = tf.transpose(outs, perm=[0, 2, 1, 3])
-        outs = tf.reshape(outs, [batches, -1, self.dm])
-        return self.linear(outs), weights
+    def split_heads(self, x, batch_size):
+        """Split heads method."""
+        x = tf.reshape(x, (batch_size, -1, self.h, self.depth))
+        return tf.transpose(x, perm=[0, 2, 1, 3])
