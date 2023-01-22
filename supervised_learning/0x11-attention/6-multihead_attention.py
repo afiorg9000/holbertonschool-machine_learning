@@ -9,16 +9,15 @@ class MultiHeadAttention(tf.keras.layers.Layer):
 
     def __init__(self, dm, h):
         """perform multi head attention:"""
-        self.h = h
+        super(MultiHeadAttention, self).__init__()
         self.dm = dm
+        self.h = h
         self.depth = dm // h
         self.Wq = tf.keras.layers.Dense(dm)
         self.Wk = tf.keras.layers.Dense(dm)
         self.Wv = tf.keras.layers.Dense(dm)
         self.linear = tf.keras.layers.Dense(dm)
-
-        super(MultiHeadAttention, self).__init__()
-
+ 
     def call(self, Q, K, V, mask):
         """perform multi head attention:"""
         batches = tf.shape(Q)[0]
