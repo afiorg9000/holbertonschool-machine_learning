@@ -17,7 +17,7 @@ class MultiHeadAttention(tf.keras.layers.Layer):
         self.Wk = tf.keras.layers.Dense(dm)
         self.Wv = tf.keras.layers.Dense(dm)
         self.linear = tf.keras.layers.Dense(dm)
- 
+
     def call(self, Q, K, V, mask):
         """perform multi head attention:"""
         batch_size = tf.shape(Q)[0]
@@ -35,6 +35,6 @@ class MultiHeadAttention(tf.keras.layers.Layer):
         return output, attention_weights
 
     def split_heads(self, x, batch_size):
-        """Split heads method."""
+        """perform multi head attention:"""
         x = tf.reshape(x, (batch_size, -1, self.h, self.depth))
         return tf.transpose(x, perm=[0, 2, 1, 3])
