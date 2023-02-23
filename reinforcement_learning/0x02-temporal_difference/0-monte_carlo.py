@@ -16,7 +16,7 @@ def monte_carlo(env, V, policy, episodes=5000, max_steps=100, alpha=0.1,
             action_reward.append((state, action, reward))
             if done:
                 break
-        T = len(state_action_reward) - 1
+        T = len(action_reward) - 1
         G = 0
         for a in range(T - 1, -1, -1):
             state, action, _ = action_reward[a]
