@@ -1,1 +1,0 @@
-If you ever want speedy access to a project or task in the Intranet, use the awesome search feature located in the lower right corner of your dashboard.

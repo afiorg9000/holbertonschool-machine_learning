@@ -11,3 +11,11 @@ def policy(matrix, weight):
     softmax = np.exp(dot_product) / np.sum(np.exp(dot_product))
     
     return softmax
+
+def policy_gradient(state, weight):
+    # Compute the policy and its gradient
+    p = policy(state, weight)
+    action = np.random.choice(range(p.shape[1]), p=p.ravel())
+    grad_log = state.T - np.dot(state.T, p)
+    
+    return action, grad_log
