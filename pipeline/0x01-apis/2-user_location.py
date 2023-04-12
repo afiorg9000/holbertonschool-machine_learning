@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 """prints the location of a specific user:"""
-
 import sys
 import requests
 import time

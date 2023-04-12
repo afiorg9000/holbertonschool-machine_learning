@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 """"displays the upcoming launch with these information:"""
-
 import requests
 
 

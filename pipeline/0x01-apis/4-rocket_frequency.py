@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 """"displays the number of launches per rocket."""
-
 import requests
 
 
 if __name__ == '__main__':
-    response = requests.get("https://api.spacexdata.com/v4/launches").json()
+    response = requests.get(
+        "https://api.spacexdata.com/v4/launches").json()
 
     rockets = {}
 

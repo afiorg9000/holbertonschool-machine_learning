@@ -2,8 +2,9 @@
 """returns the list of ships that can hold a given number of passengers:"""
 import requests
 
+
 def availableShips(passengerCount):
-    """returns the list of ships that can hold a given number of passengers:"""
+    """returns the list of ships that can hold a given number of"""
     response = requests.get("https://swapi-api.hbtn.io/api/starships/")
     response = response.json()
     ships = []

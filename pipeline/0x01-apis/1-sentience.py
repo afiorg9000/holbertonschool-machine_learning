@@ -1,12 +1,10 @@
 #!/usr/bin/env python3
 """returns the list of names of the home planets of all sentient species."""
-
-
 import requests
 
 
 def sentientPlanets():
-    """returns the list of names of the home planets of all sentient species."""
+    """returns the list of names of the home planets of all sentient"""
     response = requests.get("https://swapi-api.hbtn.io/api/species/")
 
     response = response.json()
