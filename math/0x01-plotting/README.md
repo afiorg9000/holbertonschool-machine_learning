@@ -1,5 +1,17 @@
 # 0x01. Plotting
 
+> A plot is a graphical technique for representing a data set, usually as a graph, showing the relationship between two or more variables. The plot can be drawn by hand or by a computer. This project will cover plot techniques using the Python library [MatplotLib](https://matplotlib.org/)
+
+At the end of this project I was able to solve these conceptual questions:
+
+* What is a plot?
+* What is a scatter plot? line graph? bar graph? histogram?
+* What is `matplotlib`?
+* How to plot data with `matplotlib`
+* How to label a plot
+* How to scale an axis
+* How to plot multiple sets of data at the same time
+  
 ## Tasks
 
 ### 0. Line Graph
