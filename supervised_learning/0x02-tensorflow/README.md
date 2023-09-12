@@ -1,1 +1,6 @@
-0x02. Tensorflow
+<h1 align="center">Welcome to 0x02-tensorflow 👋</h1>
+<p>
+</p>
+
+> Directory for the Tensorflow project done at Holberton
+
